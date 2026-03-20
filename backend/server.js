@@ -4,6 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
+const questionRoutes = require('./routes/questions');
+const progressRoutes = require('./routes/progress');
 
 const app = express();
 
@@ -18,6 +20,8 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/questions', questionRoutes);
+app.use('/api/progress', progressRoutes);
 
 // Test route
 app.get('/', (req, res) => {
