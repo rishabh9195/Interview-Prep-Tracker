@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const questionRoutes = require('./routes/questions');
 const progressRoutes = require('./routes/progress');
+const experienceRoutes = require('./routes/experiences');
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', authRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/progress', progressRoutes);
+app.use('/api/experiences', experienceRoutes);
 
 // Test route
 app.get('/', (req, res) => {

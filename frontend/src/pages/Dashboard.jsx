@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Dashboard() {
@@ -58,25 +58,19 @@ function Dashboard() {
   };
 
   const getTopicQuestions = (topic) => questions.filter(q => q.topic === topic);
-  
   const getSolvedCount = () => Object.values(progress).filter(s => s === 'solved').length;
-  
   const getInProgressCount = () => Object.values(progress).filter(s => s === 'in-progress').length;
-  
-  const getCompletion = () => questions.length > 0 
+  const getCompletion = () => questions.length > 0
     ? Math.round((getSolvedCount() / questions.length) * 100) : 0;
-
   const getTopicSolved = (topic) => {
     const topicQs = getTopicQuestions(topic);
     return topicQs.filter(q => progress[q._id] === 'solved').length;
   };
-
   const getStatusColor = (status) => {
     if (status === 'solved') return '#059669';
     if (status === 'in-progress') return '#d97706';
     return '#374151';
   };
-
   const getDifficultyColor = (diff) => {
     if (diff === 'Easy') return '#34d399';
     if (diff === 'Medium') return '#fbbf24';
@@ -91,6 +85,7 @@ function Dashboard() {
       <div style={styles.navbar}>
         <h1 style={styles.logo}>Interview Prep Tracker 🎯</h1>
         <div style={styles.navRight}>
+          <Link to="/experiences" style={styles.navLink}>💼 Experiences</Link>
           <span style={styles.username}>👋 {user.name}</span>
           <button onClick={handleLogout} style={styles.logoutBtn}>Logout</button>
         </div>
@@ -155,13 +150,13 @@ function Dashboard() {
                     onClick={() => updateProgress(q._id, status)}
                     style={{
                       ...styles.statusBtn,
-                      backgroundColor: progress[q._id] === status 
+                      backgroundColor: progress[q._id] === status
                         ? getStatusColor(status) : 'transparent',
                       borderColor: getStatusColor(status),
                       color: progress[q._id] === status ? 'white' : '#9ca3af',
                     }}
                   >
-                    {status === 'unsolved' ? '✗ Unsolved' : 
+                    {status === 'unsolved' ? '✗ Unsolved' :
                      status === 'in-progress' ? '⟳ In Progress' : '✓ Solved'}
                   </button>
                 ))}
@@ -186,6 +181,7 @@ const styles = {
   },
   logo: { color: 'white', fontSize: '20px', fontWeight: 'bold' },
   navRight: { display: 'flex', alignItems: 'center', gap: '16px' },
+  navLink: { color: '#60a5fa', textDecoration: 'none' },
   username: { color: '#9ca3af' },
   logoutBtn: {
     backgroundColor: 'transparent',
