@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const questionRoutes = require('./routes/questions');
 const progressRoutes = require('./routes/progress');
 const experienceRoutes = require('./routes/experiences');
+const streakRoutes = require('./routes/streak');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/experiences', experienceRoutes);
+app.use('/api/streak', streakRoutes);
 
 // Test route
 app.get('/', (req, res) => {

@@ -1,24 +1,28 @@
 const mongoose = require('mongoose');
 
 const ProgressSchema = new mongoose.Schema({
-  userId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
-    required: true 
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  questionId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Question', 
-    required: true 
+  questionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Question',
+    required: true
   },
-  status: { 
-    type: String, 
-    enum: ['unsolved', 'in-progress', 'solved'], 
-    default: 'unsolved' 
+  status: {
+    type: String,
+    enum: ['unsolved', 'in-progress', 'solved'],
+    default: 'unsolved'
   },
-  updatedAt: { 
-    type: Date, 
-    default: Date.now 
+  notes: {
+    type: String,
+    default: ''
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
   }
 });
 

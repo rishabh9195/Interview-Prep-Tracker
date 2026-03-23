@@ -12,20 +12,20 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
-// Update progress
+// Update progress and notes
 router.post('/update', async (req, res) => {
   try {
-    const { userId, questionId, status } = req.body;
+    const { userId, questionId, status, notes } = req.body;
 
-    // Find existing or create new
     let progress = await Progress.findOne({ userId, questionId });
 
     if (progress) {
-      progress.status = status;
+      if (status !== undefined) progress.status = status;
+      if (notes !== undefined) progress.notes = notes;
       progress.updatedAt = Date.now();
       await progress.save();
     } else {
-      progress = new Progress({ userId, questionId, status });
+      progress = new Progress({ userId, questionId, status, notes });
       await progress.save();
     }
 
